@@ -27,8 +27,6 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = False
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = True
-DEBUG = bool(os.environ.get('DJANGO_DEBUG',True))
 
 SESSION_COOKIE_SECURE = True  
 CSRF_COOKIE_SECURE = True
