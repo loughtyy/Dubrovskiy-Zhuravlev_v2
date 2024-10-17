@@ -24,10 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 #SECRET_KEY = 'django-insecure-ioc+_2mxk2-&=bb+jcd6*p=%d7(9kacsg*izaywsx^%d-p9=hw'
 SECRET_KEY = os.environ.get("SECRET_KEY")  
 
-if os.environ.get("DEBUG") == "False":
-    DEBUG = False
-else:
-    DEBUG = True
+DEBUG = False
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
@@ -36,7 +33,7 @@ DEBUG = bool(os.environ.get('DJANGO_DEBUG',True))
 SESSION_COOKIE_SECURE = True  
 CSRF_COOKIE_SECURE = True
 
-ALLOWED_HOSTS = ["127.0.0.1", "loughtyy.pythonanywhere.com"]
+ALLOWED_HOSTS = ["loughtyy.pythonanywhere.com","127.0.0.1"]
 
 
 # Application definition
@@ -89,16 +86,13 @@ WSGI_APPLICATION = 'WebBooks.wsgi.application'
 DATABASES = {
     'default': {
         "ENGINE": "django.db.backends.mysql",  
-        "NAME": os.getenv("MYSQL_DBNAME"),  
-        "USER": os.getenv("MYSQL_USER"),  
-        "PASSWORD": os.getenv("MYSQL_PASSWORD"),  
-        "HOST": os.getenv("MYSQL_HOST"),  
-        "OPTIONS": {  
-            "init_command": "SET NAMES 'utf8mb4';SET sql_mode = 'STRICT_TRANS_TABLES'",  
-            "charset": "utf8mb4",
+        "NAME": "loughtyy$default",  
+        "USER": "loughtyy",  
+        "PASSWORD": "ebra123!",  
+        "HOST": "loughtyy.pythonanywhere.com",  
         },  
     }
-}
+
 
 
 # Password validation
