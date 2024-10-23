@@ -33,4 +33,8 @@ urlpatterns = [
  re_path(r'^book/create/$', views.BookCreate.as_view(), name='book_create'),
  re_path(r'^book/update/(?P<pk>\d+)$', views.BookUpdate.as_view(), name='book_update'),
  re_path(r'^book/delete/(?P<pk>\d+)$', views.BookDelete.as_view(), name='book_delete'),
+ path('start1/', views.start1, name='start1'),
+ path('color_bg/', views.color_bg, name='color-bg'),
+ path('color_text/', views.color_text, name='color_text'),
+ path('color_text_bg/', views.color_text_bg, name='color_text_bg'),
 ]
