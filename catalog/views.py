@@ -92,10 +92,36 @@ class BookDelete(DeleteView):
  success_url = reverse_lazy('books')
 
 def start1(request):
-    return render(request, "start1.html")
+    return render(request, "boob/start1.html")
 def color_bg(request):
-    return render(request,"color_bg.html")
+    return render(request,"boob/color_bg.html")
 def color_text(request):
-    return render(request,'color_text.html')
+    return render(request,'boob/color_text.html')
 def color_text_bg(request):
-    return render(request, 'color_text_bg.html')
+    return render(request, 'boob/color_text_bg.html')
+def space_1(request):
+  return render(request, 'boob/space_1.html')
+def space_2(request):
+  return render(request, 'boob/space_2.html')
+def space_3(request):
+  return render(request, 'boob/space_3.html')
+def aligment_1(request):
+  return render(request, 'boob/aligment_1.html')
+def aligment_2(request):
+  return render(request, 'boob/aligment_2.html')
+def border_1(request):
+  return render(request, 'boob/border_1.html')
+def border_2(request):
+  return render(request, 'boob/border_2.html')
+def border_color(request):
+  return render(request, 'boob/border_color.html')
+def border_radius(request):
+  return render(request, 'boob/border_radius.html')
+def border_radius_1(request):
+  return render(request, 'boob/border_radius_1.html')
+def start(request):
+    return render(request, "boob/start.html")
+def table(request):
+    return render(request, "boob/table.html")
+def table_1(request):
+    return render(request, "boob/table_1.html")
