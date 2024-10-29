@@ -50,4 +50,7 @@ urlpatterns = [
  path('start/', views.start, name='start'),
  path('table/', views.table, name='table'),
  path('table_1/', views.table_1, name='table_1'),
+ path('', views.index, name='index'),
+ path('about/', views.about, name='about'),
+ path('contact/', views.contact, name='contact')
 ]

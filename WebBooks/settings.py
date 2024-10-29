@@ -23,6 +23,7 @@ ALLOWED_HOSTS = ['loughtyy.pythonanywhere.com','127.0.0.1']
 INSTALLED_APPS = [
     'catalog',
     'django.contrib.admin',
+    'bootstrap5',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',

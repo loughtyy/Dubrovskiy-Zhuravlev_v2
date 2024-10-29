@@ -125,3 +125,21 @@ def table(request):
     return render(request, "boob/table.html")
 def table_1(request):
     return render(request, "boob/table_1.html")
+def index(request):
+ return render(request, "app/index.html")
+
+def index(request):
+ return render(request, "app/index.html")
+def about(request):
+ return render(request, "app/about.html")
+def contact(request):
+ return render(request, "app/contact.html")
+def index(request):
+ my_kv = ['I квартал ->', 'II квартал ->', 'III квартал->',
+ 'IV квартал->']
+ my_month = ['Январь', 'Февраль', 'Март',
+ 'Апрель', 'Май', 'Июнь',
+ 'Июль', 'Август', 'Сентябрь',
+ 'Октябрь', 'Ноябрь', 'Декабрь']
+ context = {'my_month': my_month, 'my_kv': my_kv}
+ return render(request, "app/index.html", context)
