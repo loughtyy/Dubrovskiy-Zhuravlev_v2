@@ -28,3 +28,4 @@ sqlparse==0.5.1
 tzdata==2024.1
 uritemplate==4.1.1
 urllib3==2.2.3
+django-bootstrap==1.0.11

@@ -16,3 +16,7 @@ class BookModelForm(ModelForm):
  class Meta:
   model = Book
   fields = ['title', 'genre', 'language', 'author', 'summary', 'isbn']
+
+class UserForm(forms.Form):
+ uuid_text = forms.UUIDField(label="Введите UUID",
+ help_text="Формат xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx")

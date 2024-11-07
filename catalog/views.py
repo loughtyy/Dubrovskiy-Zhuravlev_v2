@@ -3,6 +3,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views import generic
 from .forms import AuthorsForm
+from .forms import UserForm
+from django.shortcuts import redirect
 from django.http import *
 from django.shortcuts import render
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -143,3 +145,11 @@ def index(request):
  'Октябрь', 'Ноябрь', 'Декабрь']
  context = {'my_month': my_month, 'my_kv': my_kv}
  return render(request, "app/index.html", context)
+def my_form(request):
+    if request.method == 'POST':
+        form = UserForm(request.POST, request.FILES)
+        if form.is_valid():
+            return redirect('my_form/')
+    else:
+        form = UserForm()
+    return render(request, "my_form.html", {'form': form})

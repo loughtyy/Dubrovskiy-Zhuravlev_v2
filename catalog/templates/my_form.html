@@ -1,0 +1,10 @@
+{% extends "app/base.html" %}
+{% block title %}форфор{% endblock title %}
+{% block content %}
+    <h1><b>Изучаем формы Django</b></h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Отправить</button>
+    </form>
+{% endblock %}
