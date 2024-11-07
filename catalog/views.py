@@ -145,11 +145,25 @@ def index(request):
  'Октябрь', 'Ноябрь', 'Декабрь']
  context = {'my_month': my_month, 'my_kv': my_kv}
  return render(request, "app/index.html", context)
+
+
+
+def index(request):
+ my_text = 'Изучаем формы Django'
+ context = {'my_text': my_text}
+ return render(request, "app/index.html", context)
+def about(request):
+ return render(request, "app/about.html")
+def contact(request):
+ return render(request, "app/contact.html")
 def my_form(request):
-    if request.method == 'POST':
-        form = UserForm(request.POST, request.FILES)
-        if form.is_valid():
-            return redirect('my_form/')
-    else:
-        form = UserForm()
-    return render(request, "my_form.html", {'form': form})
+  if request.method == "POST":
+   userform = UserForm(request.POST)
+   if userform.is_valid():
+       name = request.POST.get("name")
+       age = request.POST.get("age") 
+       output = "<h2>Пользователь</h2><h3>Имя - {0}," \
+           " Возраст – {1} </h3 >".format(name, age)
+   return HttpResponse(output)
+  userform = UserForm()
+  return render(request, "my_form.html", {"form": userform})
