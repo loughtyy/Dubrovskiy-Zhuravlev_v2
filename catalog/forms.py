@@ -4,6 +4,9 @@ from django.forms import ModelForm
 from .models import Book
 from .models import Person
 from .models import Image
+from .models import File
+from .models import VideoFile
+from .models import AudioFile 
 
 class AuthorsForm(forms.Form):
  first_name = forms.CharField(label="Имя автора")
@@ -30,3 +33,18 @@ class ImageForm(forms.ModelForm):
   model = Image
   fields = '__all__'
   #fields = ['title', 'image']
+
+class FileForm(forms.ModelForm):
+ class Meta:
+  model = File
+  fields = '__all__'
+
+class VideoForm(forms.ModelForm):
+ class Meta:
+  model = VideoFile
+  fields = '__all__'
+
+class AudioForm(forms.ModelForm):
+ class Meta:
+  model = AudioFile
+  fields = '__all__'

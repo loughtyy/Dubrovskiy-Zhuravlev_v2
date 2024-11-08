@@ -60,6 +60,12 @@ urlpatterns = [
  path('my_form/delete/<int:id>/', views.delete),
  path('form_up_img/', views.form_up_img, name='form_up_img'),
  path('form_up_img/delete_img/<int:id>/', views.delete_img),
+ path('form_up_pdf/', views.form_up_pdf, name='form_up_pdf'),
+ path('form_up_pdf/delete_pdf/<int:id>/', views.delete_pdf),
+ path('form_up_video/', views.form_up_video, name='form_up_video'),
+ path('form_up_video/delete_video/<int:id>/', views.delete_video),
+ path('form_up_audio/', views.form_up_audio, name='form_up_audio'),
+ path('form_up_audio/delete_audio/<int:id>/', views.delete_audio),
 ]
 if settings.DEBUG:
  urlpatterns += static(settings.MEDIA_URL,
