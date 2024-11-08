@@ -2,6 +2,9 @@ from django import forms
 from datetime import date
 from django.forms import ModelForm
 from .models import Book
+from .models import Person
+from .models import Image
+
 class AuthorsForm(forms.Form):
  first_name = forms.CharField(label="Имя автора")
  last_name = forms.CharField(label="Фамилия автора")
@@ -17,6 +20,13 @@ class BookModelForm(ModelForm):
   model = Book
   fields = ['title', 'genre', 'language', 'author', 'summary', 'isbn']
 
-class UserForm(forms.Form):
-  email = forms.EmailField(label="Электронный адрес",
-  help_text="Обязательный символ - @")
+class UserForm(ModelForm):
+   class Meta:
+     model = Person
+     fields = ['name','age']
+
+class ImageForm(forms.ModelForm):
+ class Meta:
+  model = Image
+  fields = '__all__'
+  #fields = ['title', 'image']
