@@ -22,25 +22,28 @@ from .forms import AudioForm
 
 
 def index(request):
+ text_head = 'На нашем сайте вы можете получить книги в электронном виде'
+ books = Book.objects.all()
  num_books = Book.objects.all().count()
  num_instances = BookInstance.objects.all().count()
- num_instances_available = BookInstance.objects.filter(status__exact=2).count()
+ num_instances_available = BookInstance.objects.filter(
+ status__exact=2).count()
+ authors = Author.objects
  num_authors = Author.objects.count()
- num_visits = request.session.get('num_visits', 0)
- request.session['num_visits'] = num_visits + 1
- return render(request, 'index.html', context={
- 'num_books': num_books,
- 'num_instances': num_instances,
- 'num_instances_available': num_instances_available,
- 'num_authors': num_authors,
- 'num_visits': num_visits})
-
+ context = {'text_head': text_head,
+  'books': books, 'num_books': num_books,
+  'num_instances': num_instances,
+  'num_instances_available': num_instances_available,
+  'authors': authors, 'num_authors': num_authors}
+ return render(request, 'index.html', context)
 class BookListView(generic.ListView):
  model = Book
- paginate_by = 3
+ context_object_name = 'books'
+
 
 class BookDetailView(generic.DetailView):
     model = Book
+    context_object_name = 'book'
 
 class AuthorListView(generic.ListView):
     model = Author
@@ -103,171 +106,171 @@ class BookDelete(DeleteView):
  model = Book
  success_url = reverse_lazy('books')
 
-def start1(request):
-    return render(request, "boob/start1.html")
-def color_bg(request):
-    return render(request,"boob/color_bg.html")
-def color_text(request):
-    return render(request,'boob/color_text.html')
-def color_text_bg(request):
-    return render(request, 'boob/color_text_bg.html')
-def space_1(request):
-  return render(request, 'boob/space_1.html')
-def space_2(request):
-  return render(request, 'boob/space_2.html')
-def space_3(request):
-  return render(request, 'boob/space_3.html')
-def aligment_1(request):
-  return render(request, 'boob/aligment_1.html')
-def aligment_2(request):
-  return render(request, 'boob/aligment_2.html')
-def border_1(request):
-  return render(request, 'boob/border_1.html')
-def border_2(request):
-  return render(request, 'boob/border_2.html')
-def border_color(request):
-  return render(request, 'boob/border_color.html')
-def border_radius(request):
-  return render(request, 'boob/border_radius.html')
-def border_radius_1(request):
-  return render(request, 'boob/border_radius_1.html')
-def start(request):
-    return render(request, "boob/start.html")
-def table(request):
-    return render(request, "boob/table.html")
-def table_1(request):
-    return render(request, "boob/table_1.html")
-def index(request):
- return render(request, "app/index.html")
+# def start1(request):
+#     return render(request, "boob/start1.html")
+# def color_bg(request):
+#     return render(request,"boob/color_bg.html")
+# def color_text(request):
+#     return render(request,'boob/color_text.html')
+# def color_text_bg(request):
+#     return render(request, 'boob/color_text_bg.html')
+# def space_1(request):
+#   return render(request, 'boob/space_1.html')
+# def space_2(request):
+#   return render(request, 'boob/space_2.html')
+# def space_3(request):
+#   return render(request, 'boob/space_3.html')
+# def aligment_1(request):
+#   return render(request, 'boob/aligment_1.html')
+# def aligment_2(request):
+#   return render(request, 'boob/aligment_2.html')
+# def border_1(request):
+#   return render(request, 'boob/border_1.html')
+# def border_2(request):
+#   return render(request, 'boob/border_2.html')
+# def border_color(request):
+#   return render(request, 'boob/border_color.html')
+# def border_radius(request):
+#   return render(request, 'boob/border_radius.html')
+# def border_radius_1(request):
+#   return render(request, 'boob/border_radius_1.html')
+# def start(request):
+#     return render(request, "boob/start.html")
+# def table(request):
+#     return render(request, "boob/table.html")
+# def table_1(request):
+#     return render(request, "boob/table_1.html")
+# def index(request):
+#  return render(request, "app/index.html")
 
-def index(request):
- return render(request, "app/index.html")
-def about(request):
- return render(request, "app/about.html")
-def contact(request):
- return render(request, "app/contact.html")
-def index(request):
- my_kv = ['I квартал ->', 'II квартал ->', 'III квартал->',
- 'IV квартал->']
- my_month = ['Январь', 'Февраль', 'Март',
- 'Апрель', 'Май', 'Июнь',
- 'Июль', 'Август', 'Сентябрь',
- 'Октябрь', 'Ноябрь', 'Декабрь']
- context = {'my_month': my_month, 'my_kv': my_kv}
- return render(request, "app/index.html", context)
-
-
-
-def index(request):
- my_text = 'Изучаем формы Django'
- people_kol = Person.object_person.count()
- context = {'my_text': my_text,"people_kol": people_kol}
- return render(request, "app/index.html", context)
-def about(request):
- return render(request, "app/about.html")
-def contact(request):
- return render(request, "app/contact.html")
+# def index(request):
+#  return render(request, "app/index.html")
+# def about(request):
+#  return render(request, "app/about.html")
+# def contact(request):
+#  return render(request, "app/contact.html")
+# def index(request):
+#  my_kv = ['I квартал ->', 'II квартал ->', 'III квартал->',
+#  'IV квартал->']
+#  my_month = ['Январь', 'Февраль', 'Март',
+#  'Апрель', 'Май', 'Июнь',
+#  'Июль', 'Август', 'Сентябрь',
+#  'Октябрь', 'Ноябрь', 'Декабрь']
+#  context = {'my_month': my_month, 'my_kv': my_kv}
+#  return render(request, "app/index.html", context)
 
 
-def my_form(request):
- if request.method == "POST": 
-  form = UserForm(request.POST) 
-  if form.is_valid(): 
-    form.save()
- my_text = 'Сведения о клиентах'
- people = Person.object_person.all()
- form = UserForm()
- context = {'my_text': my_text, "people": people, "form": form}
- return render(request, "my_form.html", context)
 
-def edit_form(request, id):
- person = Person.object_person.get(id=id)
- if request.method == "POST":
-  person.name = request.POST.get("name")
-  person.age = request.POST.get("age")
-  person.save()
-  return redirect('my_form')
- data = {"person": person}
- return render(request, "edit_form.html", context=data)
-def delete(request, id):
- try:
-  person = Person.object_person.get(id=id)
-  person.delete()
-  return redirect('my_form')
- except Person.DoesNotExist:
-  return HttpResponseNotFound("<h2>Объект не найден</h2>")
+# def index(request):
+#  my_text = 'Изучаем формы Django'
+#  people_kol = Person.object_person.count()
+#  context = {'my_text': my_text,"people_kol": people_kol}
+#  return render(request, "app/index.html", context)
+# def about(request):
+#  return render(request, "app/about.html")
+# def contact(request):
+#  return render(request, "app/contact.html")
 
-def form_up_img(request):
- if request.method == 'POST':
-  form = ImageForm(request.POST, request.FILES)
-  if form.is_valid():
-   form.save()
- my_text = 'Загруженные изображения'
- my_img = Image.obj_img.all()
- form = ImageForm()
- context = {'my_text': my_text, "my_img": my_img, "form": form}
- return render(request, 'app/form_up_img.html', context)
 
-def delete_img(request, id):
- try:
-  img = Image.obj_img.get(id=id)
-  img.delete()
-  return redirect('form_up_img')
- except Person.DoesNotExist:
-  return HttpResponseNotFound("<h2>Объект не найден</h2>")
+# def my_form(request):
+#  if request.method == "POST": 
+#   form = UserForm(request.POST) 
+#   if form.is_valid(): 
+#     form.save()
+#  my_text = 'Сведения о клиентах'
+#  people = Person.object_person.all()
+#  form = UserForm()
+#  context = {'my_text': my_text, "people": people, "form": form}
+#  return render(request, "my_form.html", context)
+
+# def edit_form(request, id):
+#  person = Person.object_person.get(id=id)
+#  if request.method == "POST":
+#   person.name = request.POST.get("name")
+#   person.age = request.POST.get("age")
+#   person.save()
+#   return redirect('my_form')
+#  data = {"person": person}
+#  return render(request, "edit_form.html", context=data)
+# def delete(request, id):
+#  try:
+#   person = Person.object_person.get(id=id)
+#   person.delete()
+#   return redirect('my_form')
+#  except Person.DoesNotExist:
+#   return HttpResponseNotFound("<h2>Объект не найден</h2>")
+
+# def form_up_img(request):
+#  if request.method == 'POST':
+#   form = ImageForm(request.POST, request.FILES)
+#   if form.is_valid():
+#    form.save()
+#  my_text = 'Загруженные изображения'
+#  my_img = Image.obj_img.all()
+#  form = ImageForm()
+#  context = {'my_text': my_text, "my_img": my_img, "form": form}
+#  return render(request, 'app/form_up_img.html', context)
+
+# def delete_img(request, id):
+#  try:
+#   img = Image.obj_img.get(id=id)
+#   img.delete()
+#   return redirect('form_up_img')
+#  except Person.DoesNotExist:
+#   return HttpResponseNotFound("<h2>Объект не найден</h2>")
  
 
-def form_up_pdf(request):
- if request.method == 'POST':
-  form = FileForm(request.POST, request.FILES)
-  if form.is_valid():
-   form.save()
- my_text = 'Загруженные файлы'
- form = FileForm()
- file_obj = File.objects.all()
- context = {'my_text': my_text, "file_obj": file_obj, "form": form}
- return render(request, 'app/form_up_pdf.html', context)
-def delete_pdf(request, id):
- try:
-  pdf = File.objects.get(id=id)
-  pdf.delete()
-  return redirect('form_up_pdf')
- except Person.DoesNotExist:
-  return HttpResponseNotFound("<h2>Объект не найден</h2>")
+# def form_up_pdf(request):
+#  if request.method == 'POST':
+#   form = FileForm(request.POST, request.FILES)
+#   if form.is_valid():
+#    form.save()
+#  my_text = 'Загруженные файлы'
+#  form = FileForm()
+#  file_obj = File.objects.all()
+#  context = {'my_text': my_text, "file_obj": file_obj, "form": form}
+#  return render(request, 'app/form_up_pdf.html', context)
+# def delete_pdf(request, id):
+#  try:
+#   pdf = File.objects.get(id=id)
+#   pdf.delete()
+#   return redirect('form_up_pdf')
+#  except Person.DoesNotExist:
+#   return HttpResponseNotFound("<h2>Объект не найден</h2>")
  
 
-def form_up_video(request):
- if request.method == 'POST':
-  form = VideoForm(request.POST, request.FILES)
-  if form.is_valid():
-   form.save()
- my_text = 'Загруженные видео файлы'
- form = VideoForm()
- file_obj = VideoFile.obj_video.all()
- context = {'my_text': my_text, "file_obj": file_obj, "form": form}
- return render(request, 'app/form_up_video.html', context)
-def delete_video(request, id):
- try:
-  video = VideoFile.obj_video.get(id=id)
-  video.delete()
-  return redirect('form_up_video')
- except Person.DoesNotExist:
-  return HttpResponseNotFound("<h2>Объект не найден</h2>")
+# def form_up_video(request):
+#  if request.method == 'POST':
+#   form = VideoForm(request.POST, request.FILES)
+#   if form.is_valid():
+#    form.save()
+#  my_text = 'Загруженные видео файлы'
+#  form = VideoForm()
+#  file_obj = VideoFile.obj_video.all()
+#  context = {'my_text': my_text, "file_obj": file_obj, "form": form}
+#  return render(request, 'app/form_up_video.html', context)
+# def delete_video(request, id):
+#  try:
+#   video = VideoFile.obj_video.get(id=id)
+#   video.delete()
+#   return redirect('form_up_video')
+#  except Person.DoesNotExist:
+#   return HttpResponseNotFound("<h2>Объект не найден</h2>")
  
-def form_up_audio(request):
- if request.method == 'POST':
-  form = AudioForm(request.POST, request.FILES)
-  if form.is_valid():
-   form.save()
- my_text = 'Загруженные аудио файлы'
- form = AudioForm()
- file_obj = AudioFile.obj_audio.all()
- context = {'my_text': my_text, "file_obj": file_obj, "form": form}
- return render(request, 'app/form_up_audio.html', context)
-def delete_audio(request, id):
- try:
-  audio = AudioFile.obj_audio.get(id=id)
-  audio.delete()
-  return redirect('form_up_audio')
- except Person.DoesNotExist:
-  return HttpResponseNotFound("<h2>Объект не найден</h2>")
+# def form_up_audio(request):
+#  if request.method == 'POST':
+#   form = AudioForm(request.POST, request.FILES)
+#   if form.is_valid():
+#    form.save()
+#  my_text = 'Загруженные аудио файлы'
+#  form = AudioForm()
+#  file_obj = AudioFile.obj_audio.all()
+#  context = {'my_text': my_text, "file_obj": file_obj, "form": form}
+#  return render(request, 'app/form_up_audio.html', context)
+# def delete_audio(request, id):
+#  try:
+#   audio = AudioFile.obj_audio.get(id=id)
+#   audio.delete()
+#   return redirect('form_up_audio')
+#  except Person.DoesNotExist:
+#   return HttpResponseNotFound("<h2>Объект не найден</h2>")
