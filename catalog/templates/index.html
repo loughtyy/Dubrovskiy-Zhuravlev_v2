@@ -10,8 +10,7 @@
 <div class="col text-center">
 <p>Добро пожаловать на сайт <em>Мир книг</em>. Это очень
 Простой веб-сайт, написанный на Django и Bootstrap.
-Разработан на Python в качестве учебного примера с
-использованием PyCharm.</p>
+Разработан на Python в качестве учебного примера.</p>
 </div>
 </div>
 <div class="row text-center text-dark lh-2">
@@ -42,5 +41,8 @@
 {% endfor %}
 </div>
 {% endif %}
+<div class="row text-center text-dark lh-2">
+    <h6>Количество посещений данной страницы - {{ num_visits }}</h6>
+    </div>
 </div>
 {% endblock content %}
