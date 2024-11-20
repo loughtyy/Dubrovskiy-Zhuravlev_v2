@@ -1,7 +1,10 @@
 from .models import Book, Author, BookInstance, Genre
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.urls import reverse
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
+from .forms import Form_add_author
 from .forms import AuthorsForm
 from .forms import UserForm
 from .forms import ImageForm
@@ -65,11 +68,10 @@ class LoanedBooksByUserListView(LoginRequiredMixin, generic.ListView):
     return BookInstance.objects.filter(borrower=self.request.user).filter(status__exact='2').order_by('due_back')
  
 
-def authors_add(request):
+def edit_authors(request):
  author = Author.objects.all()
- authorsform = AuthorsForm()
- return render(request, "catalog/authors_add.html",
- {"form": authorsform, "author": author})
+ context = {'author': author}
+ return render(request, "catalog/edit_authors.html", context)
 
 def create(request):
  if request.method == "POST":
@@ -79,13 +81,13 @@ def create(request):
   author.date_of_birth = request.POST.get("date_of_birth")
   author.date_of_death = request.POST.get("date_of_death")
   author.save()
-  return HttpResponseRedirect("/authors_add/")
+  return HttpResponseRedirect("/edit_authors/")
 
 def delete(request, id):
  try:
   author = Author.objects.get(id=id)
   author.delete()
-  return HttpResponseRedirect("/authors_add/")
+  return HttpResponseRedirect("/edit_authors/")
  except Author.DoesNotExist:
   return HttpResponseNotFound("<h2>Автор не найден</h2>")
 
@@ -139,6 +141,38 @@ def contact(request):
  'tel': tel,
  'email': email}
  return render(request, 'catalog/contact.html', context)
+
+class LoanedBooksByUserListView(LoginRequiredMixin, generic.ListView):
+ model = BookInstance
+ template_name = 'catalog/bookinstance_list_borrowed_user.html'
+ paginate_by = 10
+ def get_queryset(self):
+  return BookInstance.objects.filter(
+ borrower=self.request.user).filter(
+ status__exact='2').order_by('due_back')
+
+
+def add_author(request):
+ if request.method == 'POST':
+  form = Form_add_author(request.POST, request.FILES)
+  if form.is_valid():
+   first_name = form.cleaned_data.get("first_name")
+   last_name = form.cleaned_data.get("last_name")
+   date_of_birth = form.cleaned_data.get("date_of_birth")
+   about = form.cleaned_data.get("about")
+   photo = form.cleaned_data.get("photo")
+   obj = Author.objects.create(
+    first_name=first_name,
+    last_name=last_name,
+    date_of_birth=date_of_birth,
+    about=about,
+    photo=photo)
+   obj.save()
+   return HttpResponseRedirect(reverse('authors'))
+ else:
+  form = Form_add_author()
+  context = {"form": form}
+  return render(request, "catalog/authors_add.html", context)
 
 # def start1(request):
 #     return render(request, "boob/start1.html")

@@ -132,6 +132,11 @@ class BookInstance(models.Model):
  blank=True,
  help_text="Введите конец срока статуса",
  verbose_name="Дата окончания статуса")
+ borrower = models.ForeignKey(User, on_delete=models.SET_NULL,
+ null=True, blank=True,
+ verbose_name="Заказчик",
+ help_text='Выберите заказчика книги')
+ objects = models.Manager
  class Meta:
   ordering = ["due_back"]
  def __str__(self):
