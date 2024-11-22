@@ -1,8 +1,6 @@
-from django.urls import path
-from .views import ArticleView, SingleArticleView
-app_name = "articles"
+from rest_framework.routers import DefaultRouter
+from .views import ArticleViewSet
 
-urlpatterns = [
- path('articles/', ArticleView.as_view()),
- path('articles/<int:pk>', SingleArticleView.as_view()),
-]
+router = DefaultRouter()
+router.register(r'articles', ArticleViewSet, basename='user')
+urlpatterns = router.urls
